@@ -484,6 +484,5 @@ docker-compose.override.yml
 # Project Specific
 #=============================================================================
 
-## BE folder - do not push
-BE/
+
 
