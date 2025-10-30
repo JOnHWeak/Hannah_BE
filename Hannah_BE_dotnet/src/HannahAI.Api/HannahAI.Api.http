@@ -1,0 +1,6 @@
+@HannahAI.Api_HostAddress = http://localhost:5218
+
+GET {{HannahAI.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
