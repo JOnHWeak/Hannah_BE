@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # HannahAI Conversation API
+  api:
+    build: .
+    container_name: hannah-conversation-api
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=True
+      - LOG_LEVEL=INFO
+    env_file:
+      - .env
+    volumes:
+      - ./src:/app/src
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - hannah-network
+
+  # MongoDB (Future use)
+  # mongodb:
+  #   image: mongo:7.0
+  #   container_name: hannah-mongodb
+  #   ports:
+  #     - "27017:27017"
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: admin
+  #     MONGO_INITDB_ROOT_PASSWORD: password
+  #     MONGO_INITDB_DATABASE: hannah_conversation
+  #   volumes:
+  #     - mongodb_data:/data/db
+  #   networks:
+  #     - hannah-network
+
+  # Elasticsearch (Future use)
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+  #   container_name: hannah-elasticsearch
+  #   environment:
+  #     - discovery.type=single-node
+  #     - xpack.security.enabled=false
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #   ports:
+  #     - "9200:9200"
+  #   volumes:
+  #     - elasticsearch_data:/usr/share/elasticsearch/data
+  #   networks:
+  #     - hannah-network
+
+networks:
+  hannah-network:
+    driver: bridge
+
+# volumes:
+#   mongodb_data:
+#   elasticsearch_data:
+
